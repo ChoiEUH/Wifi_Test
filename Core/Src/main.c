@@ -47,9 +47,9 @@ char buf[256];
 
 char wibuf[256];
 
-uint8_t cwjap[] = "AT+CWJAP=\"choi\",\"cuh010108\"\r\n";
+uint8_t cwjap[] = "AT+CWJAP=\"ssid\",\"pw\"\r\n";
 
-uint8_t tcp[] = "AT+CIPSTART=\"TCP\",\"192.168.146.237\",5001\r\n";
+uint8_t tcp[] = "AT+CIPSTART=\"TCP\",\"yourwifiip\",5001\r\n";
 
 uint8_t close[] = "AT+CIPCLOSE\r\n";
 
@@ -452,7 +452,7 @@ void sensorTask(void *argument)
 	  osDelay(1000);
 	  QMC_READ(&Q);
       osDelay(10);
-    sprintf(wibuf,"GET /test?data=%d,%d,%d HTTP/1.1\r\nHost: 192.168.146.237\r\nConnection: close\r\n\r\n",Q.x,Q.y,Q.z);
+    sprintf(wibuf,"GET /test?data=%d,%d,%d HTTP/1.1\r\nHost:yourwifiip\r\nConnection: close\r\n\r\n",Q.x,Q.y,Q.z);
 
     sprintf(buf, "AT+CIPSEND=%d\r\n", strlen(wibuf));
     HAL_UART_Transmit(&huart6,(uint8_t*)buf,strlen(buf),100);
